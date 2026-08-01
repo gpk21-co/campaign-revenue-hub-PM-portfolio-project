@@ -6,7 +6,8 @@
 
 **Campaign Revenue Hub** is a fictional 0-to-1 enterprise SaaS platform designed to bridge the gap between marketing execution, financial compliance, sales contract management, and executive forecasting. 
 
-This repository contains the interactive, single-file web prototype (`index.html`) alongside the end-to-end **Product Management discovery, strategy, architecture, and design artifacts** that informed its development.
+This repository contains the interactive, single-file web prototype alongside the end-to-end **Product Management discovery, strategy, architecture, and design artifacts** that informed its development.
+https://gpk21-co.github.io/campaign-revenue-hub-PM-portfolio-project/
 
 ---
 
