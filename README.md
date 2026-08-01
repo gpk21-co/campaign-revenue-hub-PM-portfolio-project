@@ -40,9 +40,10 @@ The platform was architected around four primary user personas identified during
 The platform is structured into **11 interconnected modules** covering the full revenue and campaign lifecycle: 
 
 1. **Executive Overview Dashboard:** High-density KPI cards (Recognized Revenue, Forecast Spend, Overdue Invoices, Collection Rate) and a 36-month Chart.js historical/forecasted visual.
-2. **Campaign Performance & Pacing:** Live budget allocation tracking with status indicators (`Active`, `Overbudget Risk`) and detail drill-down modals.
+2. **Campaign Performance & Pacing:** Live budget allocation tracking with status indicators (Active, Overbudget Risk) and detail drill-down modals.
 3. **Invoice Hub:** Streamlined invoice generation, due date management, and settlement tracking.
-4. **Payments & Collections:** Settlement transaction logs highlighting ACH, wire, and credit payment streams. 5. **Contracts:** Master Service Agreements (MSAs), Contract Value (TCV) tracking, and amendment logs.
+4. **Payments & Collections:** Settlement transaction logs highlighting ACH, wire, and credit payment streams.
+5. **Contracts:** Master Service Agreements (MSAs), Contract Value (TCV) tracking, and amendment logs.
 6. **Predictive Intelligence & Forecasting:** Machine learning scenario models predicting end-of-quarter budget consumption and overages.
 7. **Scheduled Reports:** Automated financial schedules and export engines for accounting compliance.
 8. **Connected Accounts:** Enterprise integration status (NetSuite ERP, Salesforce CRM).
