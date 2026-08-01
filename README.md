@@ -37,21 +37,9 @@ The platform was architected around four primary user personas identified during
 
 ## 🛠 Product Architecture & Feature Mapping
 
-The platform is structured into **11 interconnected modules** covering the full revenue and campaign lifecycle: 1. **Executive Overview Dashboard:** High-density KPI cards (Recognized Revenue, Forecast Spend, Overdue Invoices, Collection Rate) and a 36-month Chart.js historical/forecasted visual.
-2. **Campaign Performance & Pacing:** Live budget allocation tracking with status indicators (`Active`, `Overbudget Risk`) and detail drill-down modals.
-3. **Invoice Hub:** Streamlined invoice generation, due date management, and settlement tracking.
-4. **Payments & Collections:** Settlement transaction logs highlighting ACH, wire, and credit payment streams.
-5. **Contracts & Commercial CPQ:** Master Service Agreements (MSAs), Contract Value (TCV) tracking, and amendment logs.
-6. **Predictive Intelligence & Forecasting:** Machine learning scenario models predicting end-of-quarter budget consumption and overages.
-7. **Scheduled Reports:** Automated financial schedules and export engines for accounting compliance.
-8. **Connected Accounts:** Enterprise integration status (NetSuite ERP, Salesforce CRM).
-9. **AI Workspace:** Natural language interface enabling users to query complex finance data (e.g., *"Which campaigns are over budget?"*).
-10. **Organization Settings:** Global configuration for currencies (USD, EUR) and fiscal calendar definitions.
-11. **Admin & Governance:** Audit logging, security controls, and role-based feature flags.
+The platform is structured into **11 interconnected modules** covering the full revenue and campaign lifecycle: 
 
-## 🛠 Tech Stack
-
-**HTML5 & Vanilla JavaScript:** Dynamic client-side section routing and modal management. 
-**Tailwind Css:** Utility-first styling via CDN. 
-**Chart.js:** Responsive canvas graphics for revenue forecasting. 
-**Lucide Icons:** Clean UI iconography. 
+| Module | Description |
+| :--- | :--- | :--- | :--- |
+1. **Executive Overview Dashboard:** | High-density KPI cards (Recognized Revenue, Forecast Spend, Overdue Invoices, Collection Rate) and a 36-month Chart.js historical/forecasted visual.| 2. **Campaign Performance & Pacing:** | Live budget allocation tracking with status indicators (`Active`, `Overbudget Risk`) and detail drill-down modals.
+3. **Invoice Hub:** | Streamlined invoice generation, due date management, and settlement tracking.| 4. **Payments & Collections:** | Settlement transaction logs highlighting ACH, wire, and credit payment streams.| 5. **Contracts:** | Master Service Agreements (MSAs), Contract Value (TCV) tracking, and amendment logs. | 6. **Predictive Intelligence & Forecasting:** | Machine learning scenario models predicting end-of-quarter budget consumption and overages. | 7. **Scheduled Reports:** | Automated financial schedules and export engines for accounting compliance. | 8. **Connected Accounts:** | Enterprise integration status (NetSuite ERP, Salesforce CRM). | 9. **AI Workspace:** | Natural language interface enabling users to query complex finance data (e.g., *"Which campaigns are over budget?"*). | 10. **Organization Settings:** | Global configuration for currencies (USD, EUR) and fiscal calendar definitions. | 11. **Admin & Governance:** | Audit logging, security controls, and role-based feature flags. |
