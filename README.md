@@ -48,4 +48,5 @@ The platform is structured into **11 interconnected modules** covering the full 
 7. **Scheduled Reports:** Automated financial schedules and export engines for accounting compliance.
 8. **Connected Accounts:** Enterprise integration status (NetSuite ERP, Salesforce CRM).
 9. **AI Workspace:** Natural language interface enabling users to query complex finance data (e.g., *"Which campaigns are over budget?"*).
-10. **Organization Settings:** Global configuration for currencies (USD, EUR) and fiscal calendar definitions. 11. **Admin & Governance:** Audit logging, security controls, and role-based feature flags. |
+10. **Organization Settings:** Global configuration for currencies (USD, EUR) and fiscal calendar definitions.
+11. **Admin & Governance:** Audit logging, security controls, and role-based feature flags. |
