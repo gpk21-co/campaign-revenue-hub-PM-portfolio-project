@@ -1,0 +1,473 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>RevFlow | Enterprise Campaign Finance & RevOps</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <script src="https://unpkg.com/lucide@latest"></script>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
+    body { font-family: 'Inter', sans-serif; }
+    .page-section { display: none; }
+    .page-section.active { display: block; }
+  </style>
+</head>
+<body class="bg-slate-50 text-slate-900 antialiased h-screen flex overflow-hidden">
+
+  <aside class="w-64 bg-slate-900 text-slate-300 flex flex-col justify-between shrink-0 border-r border-slate-800">
+    <div>
+      <div class="h-16 flex items-center px-6 border-b border-slate-800 gap-3">
+        <div class="w-8 h-8 rounded-lg bg-indigo-600 flex items-center justify-center text-white font-bold text-lg">⚡</div>
+        <div>
+          <h1 class="text-white font-semibold text-sm tracking-wide">RevFlow</h1>
+          <p class="text-xs text-slate-400">Campaign Finance OS</p>
+        </div>
+      </div>
+
+      <nav class="p-4 space-y-1 text-sm font-medium">
+        <a href="#" onclick="showPage('dashboard', this)" class="nav-btn flex items-center gap-3 px-3 py-2.5 rounded-lg bg-indigo-600/10 text-indigo-400 font-semibold border border-indigo-500/20">
+          <i data-lucide="layout-dashboard" class="w-4 h-4"></i> Executive Dashboard
+        </a>
+        <a href="#" onclick="showPage('campaigns', this)" class="nav-btn flex items-center gap-3 px-3 py-2.5 rounded-lg hover:bg-slate-800 text-slate-400 hover:text-white transition">
+          <i data-lucide="target" class="w-4 h-4"></i> Campaigns
+        </a>
+        <a href="#" onclick="showPage('invoices', this)" class="nav-btn flex items-center gap-3 px-3 py-2.5 rounded-lg hover:bg-slate-800 text-slate-400 hover:text-white transition">
+          <i data-lucide="receipt" class="w-4 h-4"></i> Invoices
+        </a>
+        <a href="#" onclick="showPage('payments', this)" class="nav-btn flex items-center gap-3 px-3 py-2.5 rounded-lg hover:bg-slate-800 text-slate-400 hover:text-white transition">
+          <i data-lucide="credit-card" class="w-4 h-4"></i> Payments
+        </a>
+        <a href="#" onclick="showPage('contracts', this)" class="nav-btn flex items-center gap-3 px-3 py-2.5 rounded-lg hover:bg-slate-800 text-slate-400 hover:text-white transition">
+          <i data-lucide="file-text" class="w-4 h-4"></i> Contracts & CPQ
+        </a>
+        <a href="#" onclick="showPage('forecasting', this)" class="nav-btn flex items-center gap-3 px-3 py-2.5 rounded-lg hover:bg-slate-800 text-slate-400 hover:text-white transition">
+          <i data-lucide="trending-up" class="w-4 h-4"></i> Forecasting
+        </a>
+        <a href="#" onclick="showPage('reports', this)" class="nav-btn flex items-center gap-3 px-3 py-2.5 rounded-lg hover:bg-slate-800 text-slate-400 hover:text-white transition">
+          <i data-lucide="bar-chart-3" class="w-4 h-4"></i> Reports & Exports
+        </a>
+        <a href="#" onclick="showPage('integrations', this)" class="nav-btn flex items-center gap-3 px-3 py-2.5 rounded-lg hover:bg-slate-800 text-slate-400 hover:text-white transition">
+          <i data-lucide="plug" class="w-4 h-4"></i> Connected Accounts
+        </a>
+        <a href="#" onclick="showPage('copilot', this)" class="nav-btn flex items-center gap-3 px-3 py-2.5 rounded-lg hover:bg-slate-800 text-slate-400 hover:text-white transition">
+          <i data-lucide="bot" class="w-4 h-4"></i> AI Workspace
+        </a>
+        <a href="#" onclick="showPage('settings', this)" class="nav-btn flex items-center gap-3 px-3 py-2.5 rounded-lg hover:bg-slate-800 text-slate-400 hover:text-white transition">
+          <i data-lucide="settings" class="w-4 h-4"></i> Settings
+        </a>
+        <a href="#" onclick="showPage('admin', this)" class="nav-btn flex items-center gap-3 px-3 py-2.5 rounded-lg hover:bg-slate-800 text-slate-400 hover:text-white transition">
+          <i data-lucide="shield" class="w-4 h-4"></i> Admin Suite
+        </a>
+      </nav>
+    </div>
+
+    <div class="p-4 border-t border-slate-800 flex items-center gap-3">
+      <div class="w-9 h-9 rounded-full bg-slate-700 flex items-center justify-center text-white font-medium text-xs">VP</div>
+      <div class="overflow-hidden">
+        <p class="text-xs font-semibold text-white truncate">VP of Finance</p>
+        <p class="text-[11px] text-slate-400 truncate">vp.finance@enterprise.com</p>
+      </div>
+    </div>
+  </aside>
+
+  <main class="flex-1 flex flex-col h-screen overflow-y-auto bg-slate-50">
+    
+    <header class="h-16 bg-white border-b border-slate-200 px-8 flex items-center justify-between sticky top-0 z-10 shrink-0">
+      <div class="flex items-center gap-4 w-1/3">
+        <div class="relative w-full">
+          <i data-lucide="search" class="w-4 h-4 absolute left-3 top-2.5 text-slate-400"></i>
+          <input type="text" placeholder="Search campaigns, brands, contracts, invoices (⌘K)..." class="w-full pl-9 pr-4 py-1.5 text-xs rounded-lg border border-slate-200 bg-slate-50 focus:bg-white focus:outline-none focus:ring-2 focus:ring-indigo-500 text-slate-700" />
+        </div>
+      </div>
+      <div class="flex items-center gap-3">
+        <span class="inline-flex items-center px-2.5 py-1 rounded-full text-xs font-medium bg-emerald-50 text-emerald-700 border border-emerald-200">
+          ● NetSuite Sync Active
+        </span>
+        <button class="p-2 text-slate-500 hover:bg-slate-100 rounded-lg relative">
+          <i data-lucide="bell" class="w-4 h-4"></i>
+          <span class="absolute top-1 right-1 w-2 h-2 rounded-full bg-rose-500"></span>
+        </button>
+      </div>
+    </header>
+
+    <div class="p-8 space-y-6">
+
+      <section id="dashboard" class="page-section active space-y-6">
+        <div class="flex justify-between items-center">
+          <div>
+            <h2 class="text-xl font-bold text-slate-900 tracking-tight">Executive Overview</h2>
+            <p class="text-xs text-slate-500">Real-time financial performance, pacing, and revenue recognition</p>
+          </div>
+          <div class="flex gap-2">
+            <select class="text-xs border border-slate-200 rounded-lg px-3 py-1.5 bg-white shadow-sm font-medium text-slate-700">
+              <option>Q3 2026 (July - Sept)</option>
+              <option>Q2 2026</option>
+            </select>
+            <button class="text-xs bg-indigo-600 text-white font-medium px-3 py-1.5 rounded-lg shadow-sm hover:bg-indigo-700">Export Report</button>
+          </div>
+        </div>
+
+        <div class="grid grid-cols-4 gap-4">
+          <div class="bg-white p-5 rounded-xl border border-slate-200 shadow-sm">
+            <p class="text-xs font-semibold text-slate-500 uppercase tracking-wider">Revenue Recognized (ASC 606)</p>
+            <p class="text-2xl font-bold text-slate-900 mt-2">$16,100,000</p>
+            <p class="text-xs text-emerald-600 mt-1 font-medium">↑ +12.4% vs last quarter</p>
+          </div>
+          <div class="bg-white p-5 rounded-xl border border-slate-200 shadow-sm">
+            <p class="text-xs font-semibold text-slate-500 uppercase tracking-wider">Forecast Spend (Q3)</p>
+            <p class="text-2xl font-bold text-slate-900 mt-2">$6,520,000</p>
+            <p class="text-xs text-amber-600 mt-1 font-medium">⚠ +2.1% over budget forecast</p>
+          </div>
+          <div class="bg-white p-5 rounded-xl border border-slate-200 shadow-sm">
+            <p class="text-xs font-semibold text-slate-500 uppercase tracking-wider">Overdue Invoices</p>
+            <p class="text-2xl font-bold text-rose-600 mt-2">$235,000</p>
+            <p class="text-xs text-rose-600 mt-1 font-medium">2 Invoices (>30 Days Past Due)</p>
+          </div>
+          <div class="bg-white p-5 rounded-xl border border-slate-200 shadow-sm">
+            <p class="text-xs font-semibold text-slate-500 uppercase tracking-wider">Collection Rate</p>
+            <p class="text-2xl font-bold text-slate-900 mt-2">94.2%</p>
+            <p class="text-xs text-emerald-600 mt-1 font-medium">↑ +1.8% vs benchmark</p>
+          </div>
+        </div>
+
+        <div class="bg-white p-6 rounded-xl border border-slate-200 shadow-sm">
+          <div class="flex justify-between items-center mb-4">
+            <h3 class="text-sm font-bold text-slate-800">36-Month Spend & Revenue Recognition Pacing</h3>
+            <span class="text-xs text-slate-500">Historical & Forecasted Data</span>
+          </div>
+          <div class="h-64">
+            <canvas id="dashboardChart"></canvas>
+          </div>
+        </div>
+      </section>
+
+      <section id="campaigns" class="page-section space-y-6">
+        <div class="flex justify-between items-center">
+          <div>
+            <h2 class="text-xl font-bold text-slate-900">Campaigns & Spend Pacing</h2>
+            <p class="text-xs text-slate-500">Track active marketing initiatives, offer limits, and retailer burn rates</p>
+          </div>
+          <button class="bg-indigo-600 text-white text-xs font-medium px-4 py-2 rounded-lg shadow-sm hover:bg-indigo-700 flex items-center gap-2">
+            <i data-lucide="plus" class="w-4 h-4"></i> Launch New Campaign
+          </button>
+        </div>
+
+        <div class="bg-white border border-slate-200 rounded-xl overflow-hidden shadow-sm">
+          <table class="w-full text-left border-collapse">
+            <thead class="bg-slate-50 text-[11px] uppercase font-semibold text-slate-500 border-b border-slate-200">
+              <tr>
+                <th class="p-4">Campaign ID</th>
+                <th class="p-4">Campaign Name</th>
+                <th class="p-4">Brand</th>
+                <th class="p-4">Budget</th>
+                <th class="p-4">Spent to Date</th>
+                <th class="p-4">Status</th>
+                <th class="p-4 text-right">Action</th>
+              </tr>
+            </thead>
+            <tbody class="text-xs divide-y divide-slate-200">
+              <tr class="hover:bg-slate-50/80 cursor-pointer" onclick="openCampaignModal('CMP-2026-001')">
+                <td class="p-4 font-mono font-medium text-indigo-600">CMP-2026-001</td>
+                <td class="p-4 font-semibold text-slate-900">Q1 Summer Glow Launch</td>
+                <td class="p-4 text-slate-600">Lumina Skincare</td>
+                <td class="p-4 font-mono">$250,000</td>
+                <td class="p-4 font-mono">$248,500 (99.4%)</td>
+                <td class="p-4"><span class="px-2 py-1 rounded-full text-[10px] font-semibold bg-emerald-50 text-emerald-700 border border-emerald-200">Active</span></td>
+                <td class="p-4 text-right"><button class="text-slate-400 hover:text-slate-600"><i data-lucide="chevron-right" class="w-4 h-4"></i></button></td>
+              </tr>
+              <tr class="hover:bg-slate-50/80 cursor-pointer" onclick="openCampaignModal('CMP-2026-002')">
+                <td class="p-4 font-mono font-medium text-indigo-600">CMP-2026-002</td>
+                <td class="p-4 font-semibold text-slate-900">Back-To-School Push</td>
+                <td class="p-4 text-slate-600">Apex Activewear</td>
+                <td class="p-4 font-mono">$500,000</td>
+                <td class="p-4 font-mono text-rose-600">$520,000 (104.0%)</td>
+                <td class="p-4"><span class="px-2 py-1 rounded-full text-[10px] font-semibold bg-rose-50 text-rose-700 border border-rose-200">Overbudget Risk</span></td>
+                <td class="p-4 text-right"><button class="text-slate-400 hover:text-slate-600"><i data-lucide="chevron-right" class="w-4 h-4"></i></button></td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </section>
+
+      <section id="invoices" class="page-section space-y-6">
+        <div class="flex justify-between items-center">
+          <div>
+            <h2 class="text-xl font-bold text-slate-900">Invoice Hub</h2>
+            <p class="text-xs text-slate-500">Automated billing generation, approval workflows, and status tracking</p>
+          </div>
+          <button class="bg-indigo-600 text-white text-xs font-medium px-4 py-2 rounded-lg hover:bg-indigo-700">Generate Billing Batch</button>
+        </div>
+
+        <div class="bg-white border border-slate-200 rounded-xl overflow-hidden shadow-sm">
+          <table class="w-full text-left border-collapse">
+            <thead class="bg-slate-50 text-[11px] uppercase font-semibold text-slate-500 border-b border-slate-200">
+              <tr>
+                <th class="p-4">Invoice #</th>
+                <th class="p-4">Brand / Org</th>
+                <th class="p-4">Amount</th>
+                <th class="p-4">Issue Date</th>
+                <th class="p-4">Due Date</th>
+                <th class="p-4">Status</th>
+              </tr>
+            </thead>
+            <tbody class="text-xs divide-y divide-slate-200">
+              <tr class="hover:bg-slate-50">
+                <td class="p-4 font-mono font-medium text-indigo-600">INV-2026-001</td>
+                <td class="p-4 text-slate-800 font-medium">Lumina Skincare</td>
+                <td class="p-4 font-mono">$125,000.00</td>
+                <td class="p-4 text-slate-500">July 1, 2026</td>
+                <td class="p-4 text-slate-500">July 31, 2026</td>
+                <td class="p-4"><span class="px-2.5 py-1 rounded-full text-[10px] font-semibold bg-emerald-50 text-emerald-700 border border-emerald-200">Paid</span></td>
+              </tr>
+              <tr class="hover:bg-slate-50">
+                <td class="p-4 font-mono font-medium text-indigo-600">INV-2026-006</td>
+                <td class="p-4 text-slate-800 font-medium">Apex Activewear</td>
+                <td class="p-4 font-mono">$140,000.00</td>
+                <td class="p-4 text-slate-500">June 15, 2026</td>
+                <td class="p-4 text-slate-500">July 15, 2026</td>
+                <td class="p-4"><span class="px-2.5 py-1 rounded-full text-[10px] font-semibold bg-rose-50 text-rose-700 border border-rose-200">Overdue (30d)</span></td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </section>
+
+      <section id="payments" class="page-section space-y-6">
+        <div>
+          <h2 class="text-xl font-bold text-slate-900">Payments & Cash Collection</h2>
+          <p class="text-xs text-slate-500">Settled transactions, ACH/Wire logs, and Stripe gateway activity</p>
+        </div>
+        <div class="bg-white p-6 rounded-xl border border-slate-200 shadow-sm">
+          <p class="text-xs text-slate-500 font-mono">PAYMENT TRANSACTION STREAM (LIVE)</p>
+          <div class="mt-4 space-y-3">
+            <div class="p-3 rounded-lg border border-slate-200 flex justify-between items-center text-xs">
+              <div>
+                <p class="font-semibold text-slate-800">PAY-701 — Lumina Skincare</p>
+                <p class="text-slate-400">ACH Settlement via Stripe Billing</p>
+              </div>
+              <div class="text-right">
+                <p class="font-mono font-bold text-emerald-600">+$125,000.00</p>
+                <p class="text-[10px] text-slate-400">Settled • July 28, 2026</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section id="contracts" class="page-section space-y-6">
+        <div>
+          <h2 class="text-xl font-bold text-slate-900">Contracts & Commercial CPQ</h2>
+          <p class="text-xs text-slate-500">Binding terms, pricing models, committed spend caps, and amendments</p>
+        </div>
+        <div class="bg-white p-6 rounded-xl border border-slate-200 shadow-sm space-y-4">
+          <div class="flex justify-between items-center border-b pb-4 border-slate-100">
+            <div>
+              <p class="text-sm font-bold text-slate-900">Contract CTR-801 — Lumina Master Agreement</p>
+              <p class="text-xs text-slate-500">TCV: $1,200,000.00 • Term: 12 Months • Net 30</p>
+            </div>
+            <span class="px-2.5 py-1 rounded-full text-xs font-semibold bg-indigo-50 text-indigo-700 border border-indigo-200">Active Master</span>
+          </div>
+          <div>
+            <p class="text-xs font-semibold text-slate-700">Amendment History</p>
+            <p class="text-xs text-slate-500 mt-1">AMD-301: Added +$150,000 seasonal budget expansion for Q3 Summer Glow Launch.</p>
+          </div>
+        </div>
+      </section>
+
+      <section id="forecasting" class="page-section space-y-6">
+        <div>
+          <h2 class="text-xl font-bold text-slate-900">Predictive Forecasting & Risk</h2>
+          <p class="text-xs text-slate-500">ML-based revenue scenarios, spend velocity projections, and risk mitigation</p>
+        </div>
+        <div class="bg-white p-6 rounded-xl border border-slate-200 shadow-sm">
+          <h3 class="text-sm font-bold text-slate-800 mb-2">Q3 End-of-Quarter Projections</h3>
+          <p class="text-xs text-slate-600">Based on current redemption velocity across 40 campaigns, total spend is forecasted to hit <span class="font-bold text-slate-900">$6.52M</span> vs <span class="font-bold text-slate-900">$6.38M</span> committed cap.</p>
+        </div>
+      </section>
+
+      <section id="reports" class="page-section space-y-6">
+        <div>
+          <h2 class="text-xl font-bold text-slate-900">Scheduled Reports & Exports</h2>
+          <p class="text-xs text-slate-500">Automated financial summaries and CSV/PDF export schedules</p>
+        </div>
+        <div class="bg-white p-6 rounded-xl border border-slate-200 shadow-sm space-y-3 text-xs">
+          <div class="flex justify-between items-center p-3 border border-slate-200 rounded-lg">
+            <div>
+              <p class="font-semibold text-slate-800">Monthly ASC 606 Revenue Schedule Export</p>
+              <p class="text-slate-400">Delivered on the 1st of every month to finance-team@enterprise.com</p>
+            </div>
+            <button class="bg-slate-100 hover:bg-slate-200 px-3 py-1.5 rounded-lg font-medium text-slate-700">Run Now</button>
+          </div>
+        </div>
+      </section>
+
+      <section id="integrations" class="page-section space-y-6">
+        <div>
+          <h2 class="text-xl font-bold text-slate-900">Connected Accounts</h2>
+          <p class="text-xs text-slate-500">Enterprise CRM, ERP, DSP, and Notification integrations</p>
+        </div>
+        <div class="grid grid-cols-3 gap-4">
+          <div class="bg-white p-5 rounded-xl border border-slate-200 shadow-sm flex items-center justify-between">
+            <div>
+              <p class="font-bold text-sm text-slate-800">Salesforce CRM</p>
+              <p class="text-xs text-slate-400">Deal & Account Sync</p>
+            </div>
+            <span class="px-2 py-1 rounded text-[10px] font-semibold bg-emerald-50 text-emerald-700 border border-emerald-200">Connected</span>
+          </div>
+          <div class="bg-white p-5 rounded-xl border border-slate-200 shadow-sm flex items-center justify-between">
+            <div>
+              <p class="font-bold text-sm text-slate-800">NetSuite ERP</p>
+              <p class="text-xs text-slate-400">RevRec Sub-Ledger</p>
+            </div>
+            <span class="px-2 py-1 rounded text-[10px] font-semibold bg-emerald-50 text-emerald-700 border border-emerald-200">Connected</span>
+          </div>
+          <div class="bg-white p-5 rounded-xl border border-slate-200 shadow-sm flex items-center justify-between">
+            <div>
+              <p class="font-bold text-sm text-slate-800">Trade Desk DSP</p>
+              <p class="text-xs text-slate-400">Ad Delivery & Events</p>
+            </div>
+            <span class="px-2 py-1 rounded text-[10px] font-semibold bg-emerald-50 text-emerald-700 border border-emerald-200">Connected</span>
+          </div>
+        </div>
+      </section>
+
+      <section id="copilot" class="page-section space-y-6">
+        <div>
+          <h2 class="text-xl font-bold text-slate-900">RevFlow AI Workspace</h2>
+          <p class="text-xs text-slate-500">Natural language copilot and real-time revenue recommendations</p>
+        </div>
+        <div class="bg-white rounded-xl border border-slate-200 shadow-sm h-[480px] flex flex-col">
+          <div class="p-4 border-b border-slate-200 bg-slate-50/50 flex items-center gap-2">
+            <i data-lucide="bot" class="w-4 h-4 text-indigo-600"></i>
+            <span class="text-xs font-bold text-slate-800">RevFlow Assistant</span>
+          </div>
+          <div class="flex-1 p-6 overflow-y-auto space-y-4 text-xs">
+            <div class="bg-indigo-50 border border-indigo-100 p-3 rounded-lg max-w-lg text-slate-800">
+              👋 Hello! I'm monitoring active campaign pacing and revenue schedules. Ask me anything like <em>"Which campaigns are over budget?"</em> or <em>"Show overdue invoices"</em>.
+            </div>
+          </div>
+          <div class="p-4 border-t border-slate-200 flex gap-2">
+            <input type="text" placeholder="Ask AI Copilot..." class="flex-1 border border-slate-200 rounded-lg px-3 py-2 text-xs focus:outline-none focus:ring-2 focus:ring-indigo-500" />
+            <button class="bg-indigo-600 text-white px-4 py-2 rounded-lg text-xs font-semibold hover:bg-indigo-700">Send</button>
+          </div>
+        </div>
+      </section>
+
+      <section id="settings" class="page-section space-y-6">
+        <div>
+          <h2 class="text-xl font-bold text-slate-900">Organization Settings</h2>
+          <p class="text-xs text-slate-500">Currencies, fiscal calendar, and system preferences</p>
+        </div>
+        <div class="bg-white p-6 rounded-xl border border-slate-200 shadow-sm max-w-2xl space-y-4 text-xs">
+          <div>
+            <label class="block font-semibold text-slate-700 mb-1">Base Currency</label>
+            <select class="w-full border border-slate-200 rounded-lg p-2 bg-white">
+              <option>USD ($) — United States Dollar</option>
+              <option>EUR (€) — Euro</option>
+            </select>
+          </div>
+        </div>
+      </section>
+
+      <section id="admin" class="page-section space-y-6">
+        <div>
+          <h2 class="text-xl font-bold text-slate-900">Admin & Governance</h2>
+          <p class="text-xs text-slate-500">Feature flags, system audit logs, and security controls</p>
+        </div>
+        <div class="bg-white p-6 rounded-xl border border-slate-200 shadow-sm space-y-3 text-xs">
+          <p class="font-semibold text-slate-800">Audit Logs</p>
+          <p class="text-slate-500 font-mono">2026-07-31 16:42:10 UTC — User 'vp.finance@enterprise.com' updated Contract CTR-801 terms.</p>
+        </div>
+      </section>
+
+    </div>
+  </main>
+
+  <div id="campaignModal" class="fixed inset-0 bg-slate-900/40 backdrop-blur-sm hidden items-center justify-center z-50">
+    <div class="bg-white rounded-xl shadow-xl border border-slate-200 w-full max-w-xl p-6 space-y-4">
+      <div class="flex justify-between items-center border-b pb-3 border-slate-100">
+        <h3 id="modalCampaignTitle" class="font-bold text-slate-900 text-sm">Campaign Details</h3>
+        <button onclick="closeCampaignModal()" class="text-slate-400 hover:text-slate-600"><i data-lucide="x" class="w-4 h-4"></i></button>
+      </div>
+      <div class="text-xs space-y-3">
+        <p class="text-slate-600">Detailed performance metrics, offer redemptions, and channel allocation breakdown for this campaign.</p>
+        <div class="p-3 bg-slate-50 rounded-lg border border-slate-200 space-y-1 font-mono">
+          <p>Total Allocations: $250,000.00</p>
+          <p>Redemptions Recorded: 14,210</p>
+          <p>Clearinghouse Settlement: Sephora ($180k), Target ($70k)</p>
+        </div>
+      </div>
+      <div class="text-right">
+        <button onclick="closeCampaignModal()" class="bg-slate-100 text-slate-700 text-xs font-semibold px-4 py-2 rounded-lg hover:bg-slate-200">Close</button>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    // Initialize Lucide Icons
+    lucide.createIcons();
+
+    // Page Switcher Function
+    function showPage(pageId, element) {
+      document.querySelectorAll('.page-section').forEach(sec => sec.classList.remove('active'));
+      document.getElementById(pageId).classList.add('active');
+
+      document.querySelectorAll('.nav-btn').forEach(btn => {
+        btn.className = "nav-btn flex items-center gap-3 px-3 py-2.5 rounded-lg hover:bg-slate-800 text-slate-400 hover:text-white transition";
+      });
+      if(element) {
+        element.className = "nav-btn flex items-center gap-3 px-3 py-2.5 rounded-lg bg-indigo-600/10 text-indigo-400 font-semibold border border-indigo-500/20";
+      }
+    }
+
+    // Modal Controls
+    function openCampaignModal(campaignId) {
+      document.getElementById('modalCampaignTitle').innerText = 'Campaign Details — ' + campaignId;
+      document.getElementById('campaignModal').classList.remove('hidden');
+      document.getElementById('campaignModal').classList.add('flex');
+    }
+    function closeCampaignModal() {
+      document.getElementById('campaignModal').classList.add('hidden');
+      document.getElementById('campaignModal').classList.remove('flex');
+    }
+
+    // Initialize Dashboard Chart
+    const ctx = document.getElementById('dashboardChart').getContext('2d');
+    new Chart(ctx, {
+      type: 'line',
+      data: {
+        labels: ['Jan 25', 'Mar 25', 'May 25', 'Jul 25', 'Sep 25', 'Nov 25', 'Jan 26', 'Mar 26', 'May 26', 'Jul 26', 'Sep 26 (F)', 'Nov 26 (F)'],
+        datasets: [
+          {
+            label: 'Recognized Revenue ($M)',
+            data: [1.2, 1.4, 1.5, 1.8, 2.0, 2.2, 2.3, 2.5, 2.7, 2.9, 3.1, 3.3],
+            borderColor: '#4F46E5',
+            backgroundColor: 'rgba(79, 70, 229, 0.05)',
+            fill: true,
+            tension: 0.3
+          },
+          {
+            label: 'Actual / Projected Spend ($M)',
+            data: [0.9, 1.1, 1.2, 1.4, 1.6, 1.8, 1.9, 2.0, 2.2, 2.4, 2.5, 2.6],
+            borderColor: '#0284C7',
+            borderDash: [5, 5],
+            fill: false,
+            tension: 0.3
+          }
+        ]
+      },
+      options: {
+        responsive: true,
+        maintainAspectRatio: false,
+        plugins: { legend: { position: 'bottom', labels: { boxWidth: 12, font: { size: 11 } } } },
+        scales: {
+          x: { grid: { display: false }, ticks: { font: { size: 10 } } },
+          y: { ticks: { font: { size: 10 } } }
+        }
+      }
+    });
+  </script>
+</body>
+</html>
